@@ -1,21 +1,25 @@
 module.exports = function (arc, cloudformation, stage) {
-  const config = arc.slack || [];
-
-  const url = config[0][1]; //TODO: make this better
-  const channel = config[1][1];
-  const user = config[2][1];
-
-  cloudformation.Resources.lambdaSlackHandler = {
-    Type: 'AWS::Serverless::Application',
+  cloudformation.Resources.LambdaSlackHandler = {
+    Type: 'AWS::Serverless::Function',
     Properties: {
-      Location: {
-        ApplicationId: 'arn:aws:serverlessrepo:us-east-1:488791064862:applications/lambda-slack-handler',
-        SemanticVersion: '1.0.1'
+      Handler: 'index.handler',
+      CodeUri: './node_modules/lambda-slack-handler',
+      Runtime: 'nodejs10.x',
+      MemorySize: 1152,
+      Timeout: 5,
+      Environment: {
+        Variables: {
+        }
       },
-      Parameters: {
-        SlackChannel: channel,
-        SlackUrl: url,
-        SlackUsername: user
+      Role: {
+        'Fn::Sub': [
+          'arn:aws:iam::${AWS::AccountId}:role/${roleName}',
+          {
+            roleName: {
+              Ref: 'Role'
+            }
+          }
+        ]
       }
     }
   };

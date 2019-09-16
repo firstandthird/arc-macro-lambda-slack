@@ -24,5 +24,8 @@
   },
   "eslintConfig": {
     "extends": "firstandthird"
+  },
+  "dependencies": {
+    "lambda-slack-handler": "^1.0.2"
   }
 }
