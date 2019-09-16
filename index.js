@@ -3,7 +3,7 @@ module.exports = function (arc, cloudformation, stage) {
     Type: 'AWS::Serverless::Function',
     Properties: {
       Handler: 'index.handler',
-      CodeUri: './node_modules/lambda-slack-handler',
+      CodeUri: 's3://lambda-slack-handler/42dc4761e78fd0e90d9579d7c10d6674',
       Runtime: 'nodejs10.x',
       MemorySize: 1152,
       Timeout: 5,
