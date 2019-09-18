@@ -1,6 +1,6 @@
 {
   "name": "arc-macro-lambda-slack",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Arc macro to add lambda slack handler",
   "main": "index.js",
   "scripts": {
