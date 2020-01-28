@@ -1,4 +1,20 @@
 module.exports = function (arc, cloudformation, stage) {
+  if (!arc.slack) {
+    throw new Error('Missing slack webhook');
+  }
+
+  const envs = {};
+
+  arc.slack.forEach(item => {
+    envs[item[0]] = item[1];
+  });
+
+  if (!envs[stage]) {
+    throw new Error(`Missing slack webhook for stage: ${stage}`);
+  }
+
+  const url = envs[stage];
+
   cloudformation.Resources.LambdaSlackHandler = {
     Type: 'AWS::Serverless::Function',
     Properties: {
@@ -9,6 +25,7 @@ module.exports = function (arc, cloudformation, stage) {
       Timeout: 5,
       Environment: {
         Variables: {
+          SLACK_HOOK: url
         }
       },
       Role: {
