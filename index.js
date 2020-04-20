@@ -1,4 +1,7 @@
 module.exports = function (arc, cloudformation, stage) {
+  if (process.env.SLACK_WEBHOOK) {
+    arc.slack = [stage, process.env.SLACK_WEBHOOK];
+  }
   if (!arc.slack) {
     throw new Error('Missing slack webhook');
   }
