@@ -23,7 +23,7 @@ module.exports = function (arc, cloudformation, stage) {
     Properties: {
       Handler: 'index.handler',
       CodeUri: 's3://lambda-slack-handler/1.3.2.zip',
-      Runtime: 'nodejs10.x',
+      Runtime: 'nodejs14.x',
       MemorySize: 128,
       Timeout: 5,
       Environment: {
